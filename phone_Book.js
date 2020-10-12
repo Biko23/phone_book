@@ -7,9 +7,9 @@ var PhoneBook = /** @class */ (function () {
     function PhoneBook() {
         this.contacts = [];
     }
-    PhoneBook.prototype.addContact = function () {
-        var contact1 = new Contact("Biko Jeremy Biteete", "+256 789940343", "bikojeremy@gmail.com");
-        this.contacts.push(contact1);
+    PhoneBook.prototype.addContact = function (contact) {
+        // let contact1 = new Contact("Biko Jeremy Biteete", "+256 789940343", "bikojeremy@gmail.com");
+        this.contacts.push(contact);
     };
     PhoneBook.prototype.listContacts = function () {
         console.log(this.contacts);
@@ -19,5 +19,5 @@ var PhoneBook = /** @class */ (function () {
     return PhoneBook;
 }());
 var biko = new PhoneBook();
-biko.addContact();
+biko.addContact({ Name: "Biko Jeremy Biteete", phone: "+256 789940343", email: "bikojeremy@gmail.com" });
 biko.listContacts();

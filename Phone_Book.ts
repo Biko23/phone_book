@@ -4,6 +4,7 @@ class Contact {
     phone : String;
 
     email : String;
+
     constructor (Name: String, phone: String, email: String){
 
     }
@@ -13,9 +14,9 @@ class PhoneBook {
     contact: Contact;
     contacts = [];
 
-    addContact(){
-        let contact1 = new Contact("Biko Jeremy Biteete", "+256 789940343", "bikojeremy@gmail.com");
-        this.contacts.push(contact1);
+    addContact(contact: Contact){
+        // let contact1 = new Contact("Biko Jeremy Biteete", "+256 789940343", "bikojeremy@gmail.com");
+        this.contacts.push(contact);
 
 
     }
@@ -29,10 +30,14 @@ class PhoneBook {
 
     }
 
+    deleteContact(){
+        
+    }
+
     
 }
 
 const biko = new PhoneBook();
-biko.addContact();
+biko.addContact({Name: "Biko Jeremy Biteete", phone: "+256 789940343", email: "bikojeremy@gmail.com"});
 biko.listContacts();
 
