@@ -1,0 +1,5 @@
+function Contact(Name, phone, email) {
+        this.Name = Name;
+        this.phone = phone;
+        this.email = email;
+    }
