@@ -1,36 +1,11 @@
 "use strict";
 exports.__esModule = true;
 var fs = require('fs');
-// const readLine = require('readline');
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-//   });
 var readLine = require("readline");
 var rl = readLine.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-// rl.question('Name: ', (nameAnswer) => {
-//         let Name = nameAnswer;
-// console.log(Name);
-// rl.question('Phone: ', (phoneAnswer) => {
-//     let Phone = phoneAnswer;
-// console.log(Phone);
-// rl.close();
-// });
-// switch(answer.toLowerCase()) {
-//   case 'y':
-//     console.log('Super!');
-//     break;
-//   case 'n':
-//     console.log('Sorry! :(');
-//     break;
-//   default:
-//     console.log('Invalid answer!');
-// }
-// rl.close();
-//   });
 var Contact = /** @class */ (function () {
     function Contact(name, phone) {
         this.name = name;
@@ -52,7 +27,7 @@ var PhoneBook = /** @class */ (function () {
             _this.contacts.push(contact);
             console.log(_this.contacts);
             infor = JSON.stringify(_this.contacts);
-            fs.appendFile("phoneBook.json", infor, function (err) {
+            fs.writeFile("phoneBook.json", infor, function (err) {
                 if (err)
                     throw console.error();
             });

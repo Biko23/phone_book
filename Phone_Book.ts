@@ -1,11 +1,5 @@
 const fs = require ('fs');
-// const readLine = require('readline');
 
-
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-//   });
 import * as readLine from "readline";
 
 const rl = readLine.createInterface({
@@ -13,29 +7,6 @@ const rl = readLine.createInterface({
     output: process.stdout
 });
 
-// rl.question('Name: ', (nameAnswer) => {
-//         let Name = nameAnswer;
-        // console.log(Name);
-    // rl.question('Phone: ', (phoneAnswer) => {
-    //     let Phone = phoneAnswer;
-        // console.log(Phone);
-
-    
-    // rl.close();
-    // });
-
-    // switch(answer.toLowerCase()) {
-    //   case 'y':
-    //     console.log('Super!');
-    //     break;
-    //   case 'n':
-    //     console.log('Sorry! :(');
-    //     break;
-    //   default:
-    //     console.log('Invalid answer!');
-    // }
-    // rl.close();
-//   });
 
 
 class Contact{
