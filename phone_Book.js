@@ -38,6 +38,16 @@ var PhoneBook = /** @class */ (function () {
         return this.contacts;
         // console.log(".......")
     };
+    PhoneBook.prototype.searchContacts = function (search) {
+        var _this = this;
+        fs.readFile("phoneBook.json", function (err, infor) {
+            if (err)
+                throw console.error();
+            _this.contacts = JSON.parse(infor);
+            var index = _this.contacts.findIndex(function (c) { return c.name === search; });
+            console.log(_this.contacts[index]);
+        });
+    };
     PhoneBook.prototype.deleteContact = function (contact) {
         var _this = this;
         fs.readFile("phoneBook.json", function (err, infor) {
@@ -61,7 +71,7 @@ inquirer.prompt([{
         name: "menu",
         type: "list",
         message: "Menu: ",
-        choices: ["Add Contacts", "Search Contacts", "Delete contacts", "Update Contacts"]
+        choices: ["Add Contacts", "Search Contacts", "Delete Contacts", "Update Contacts"]
     },
 ]).then(function (answer) {
     if (answer.menu == "Add Contacts") {
@@ -94,7 +104,27 @@ inquirer.prompt([{
         //     })
         // }) 
     }
+    else if (answer.menu == "Search Contacts") {
+        console.log("Lets get started with the search...");
+        var a_1 = new PhoneBook();
+        inquirer.prompt([{
+                name: "Search",
+                type: "input",
+                message: "Search by name: "
+            },
+        ]).then(function (answer) {
+            var searchName = answer.Search;
+            a_1.searchContacts(searchName);
+        });
+        // a.searchContacts("Igi");
+    }
+    else if (answer.menu == "Delete Contacts") {
+        console.log("Lets get it on with Deleting.....");
+    }
+    else if (answer.menu == "Update Contacts") {
+        console.log("Which contact would you like to udate....");
+    }
     else {
-        console.log("We can only add contacts right now.....");
+        console.log("Dude what would you like to do?");
     }
 });

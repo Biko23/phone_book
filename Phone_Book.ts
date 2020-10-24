@@ -51,12 +51,24 @@ class PhoneBook {
         return this.contacts;
        // console.log(".......")
     }
+    searchContacts(search){
+        fs.readFile("phoneBook.json", (err, infor) =>{
+            if(err) throw console.error();
+
+            this.contacts = JSON.parse(infor);
+            let index = this.contacts.findIndex(c => c.name === search);
+            console.log(this.contacts[index]);
+            
+        })
+    }
 
     deleteContact(contact: Contact) {
         fs.readFile("phoneBook.json", (err, infor)=>{
             if(err) throw console.error();
 
             this.contacts = JSON.parse(infor);
+
+
 
             let xd = this.contacts.indexOf(contact)
             console.log(xd)
@@ -81,7 +93,7 @@ inquirer.prompt([{
     name: "menu",
     type: "list",
     message: "Menu: ",
-    choices: ["Add Contacts", "Search Contacts", "Delete contacts", "Update Contacts"],
+    choices: ["Add Contacts", "Search Contacts", "Delete Contacts", "Update Contacts"],
 
 },
 ]).then((answer) => {
@@ -117,8 +129,29 @@ inquirer.prompt([{
         //     })
         // }) 
 
-    }else{
-        console.log("We can only add contacts right now.....")
+    }
+    else if(answer.menu == "Search Contacts"){
+        console.log("Lets get started with the search...")
+        let a = new PhoneBook();
+        inquirer.prompt([{
+            name: "Search",
+            type: "input",
+            message: "Search by name: ",
+        },
+        ]).then((answer) => {
+            let searchName = answer.Search;
+            a.searchContacts(searchName);
+        })
+        // a.searchContacts("Igi");
+    }
+    else if(answer.menu == "Delete Contacts"){
+        console.log("Lets get it on with Deleting.....")
+    }
+    else if(answer.menu == "Update Contacts"){
+        console.log("Which contact would you like to udate....")
+    }
+    else{
+        console.log("Dude what would you like to do?")
     }
 });
 
