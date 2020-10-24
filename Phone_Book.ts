@@ -2,6 +2,9 @@ const fs = require ('fs');
 
 import * as readLine from "readline";
 
+// import inquirer from "inquirer";
+const inquirer = require('inquirer');
+
 const rl = readLine.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -9,11 +12,11 @@ const rl = readLine.createInterface({
 
 
 
-class Contact{
+class Contact {
     
     name: String;
     phone: String;
-    constructor(name: String, phone: String){
+    constructor(name: String, phone: String) {
             
         this.name = name;
         this.phone = phone;
@@ -22,11 +25,11 @@ class Contact{
     }
 }
 
-class PhoneBook{
+class PhoneBook {
     
     contacts = [];
 
-    addContact(contact : Contact){
+    addContact(contact : Contact) {
         fs.readFile("phoneBook.json", (err, infor)=>{
             if(err) throw console.error();
 
@@ -38,6 +41,8 @@ class PhoneBook{
 
             infor = JSON.stringify(this.contacts);
 
+            console.log(infor)
+
             fs.writeFile("phoneBook.json", infor, (err) =>{
                 if(err) throw console.error();
                 })
@@ -46,85 +51,55 @@ class PhoneBook{
         return this.contacts;
        // console.log(".......")
     }
+
+    deleteContact(contact: Contact) {
+        fs.readFile("phoneBook.json", (err, infor)=>{
+            if(err) throw console.error();
+
+            this.contacts = JSON.parse(infor);
+
+            let xd = this.contacts.indexOf(contact)
+            console.log(xd)
+
+            // let hm = this.contacts.splice(this.contacts.indexOf(contact), 1);
+
+            // // console.log(hm);
+            // console.log(this.contacts)
+
+            // infor = JSON.stringify(this.contacts);
+
+            // fs.writeFile("phoneBook.json", infor, (err) =>{
+            //     if(err) throw console.error();
+            //     })
+            
+        })
+
+    }
 }
 
-rl.question('Name: ', (answer)=>{
-    rl.question('Phone: ', (tel)=>{
+inquirer.prompt([{
+    name: "menu",
+    type: "list",
+    message: "Menu: ",
+    choices: ["Add Contacts", "Search Contacts", "Delete contacts", "Update Contacts"],
 
-        let b = new Contact(answer, tel);
-        let a = new PhoneBook();
-        a.addContact(b);
-        // console.log(a);
-
-        rl.close();
-    })
-}) 
-
-//et c = new Contact("Dex", "54698");
-//let a = new PhoneBook();
-//a.addContact(b);
-// a.addContact(c);
-// class Contact {
-//     Name : String;
-
-//     phone : String;
-
-//     email : String;
-
-//     constructor (Name: String, phone: String, email: String) {
-//         this.Name = Name;
-//         this.phone = phone;
-//         this.email = email;
-
-//     }
-// }
-
-// class PhoneBook {
-//     // contact: Contact;
-//     contacts = [];
-//     contact1 = new Contact("Biko Jeremy Biteete", "+256 789 940343", "bikojeremy@gmail.com")
-
-
-//     addContact() {
-//         // let contact1 = new Contact("Biko Jeremy Biteete", "+256 789940343", "bikojeremy@gmail.com");
-//         // rl.question("Phone: ", (phone1) => {
-//         //     return phone1;
-//         // })
-
-//         //contact = 
-//         this.contacts.push(this.contact1);
-//         console.log(this.contacts);
-//         for(let i = 0; i <= this.contacts.length; i++) {
-//             fs.appendFile('phoneBook.txt', this.contacts[i].Name, (err) => {
-//                 if (err) throw console.error();
-                
-//             });
-//         }
+},
+]).then((answer) => {
+    if (answer['name']== "Add Contacts"){
+        rl.question('Name: ', (answer)=>{
+            rl.question('Phone: ', (tel)=>{
         
-
-
-//     }
-
-//     listContacts() {
-//         console.log(this.contacts);
-
-//     }
-
-//     editContact() {
-
-//     }
-
-//     deleteContact() {
+                let b = new Contact(answer, tel);
+                let a = new PhoneBook();
+                a.addContact(b);
+                // console.log(a);
         
-//     }
+                rl.close();
+            })
+        }) 
 
-    
-// }
-
-// PhoneBook();
-// const biko = new PhoneBook();
-// biko.addContact();
-// biko.listContacts();
-// let contact1 = "This phone book is proving a problem."
-
+    }else{
+        console.log("We can only add contacts right now.....")
+    }
+});
 
