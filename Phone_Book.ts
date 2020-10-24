@@ -85,18 +85,37 @@ inquirer.prompt([{
 
 },
 ]).then((answer) => {
-    if (answer['name']== "Add Contacts"){
-        rl.question('Name: ', (answer)=>{
-            rl.question('Phone: ', (tel)=>{
-        
-                let b = new Contact(answer, tel);
+    if (answer.menu == "Add Contacts"){
+        inquirer.prompt([{
+            name: "name",
+            type: "input",
+            masseage: "Name: ",
+        },
+        ]).then((answer) => {
+            var Name = answer.name;
+            inquirer.prompt([{
+                name: "phone",
+                type: "input",
+                message: "Phone: ",
+            },
+            ]).then((answer) => {
+                var Phone = answer.phone;
+                let b = new Contact(Name, Phone);
                 let a = new PhoneBook();
                 a.addContact(b);
-                // console.log(a);
-        
-                rl.close();
             })
-        }) 
+        })
+        // rl.question('Name: ', (answer)=>{
+        //     rl.question('Phone: ', (tel)=>{
+        
+        //         let b = new Contact(answer, tel);
+        //         let a = new PhoneBook();
+        //         a.addContact(b);
+        //         // console.log(a);
+        
+        //         rl.close();
+        //     })
+        // }) 
 
     }else{
         console.log("We can only add contacts right now.....")

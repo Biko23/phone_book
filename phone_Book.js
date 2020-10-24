@@ -65,15 +65,34 @@ inquirer.prompt([{
     },
 ]).then(function (answer) {
     if (answer.menu == "Add Contacts") {
-        rl.question('Name: ', function (answer) {
-            rl.question('Phone: ', function (tel) {
-                var b = new Contact(answer, tel);
+        inquirer.prompt([{
+                name: "name",
+                type: "input",
+                masseage: "Name: "
+            },
+        ]).then(function (answer) {
+            var Name = answer.name;
+            inquirer.prompt([{
+                    name: "phone",
+                    type: "input",
+                    message: "Phone: "
+                },
+            ]).then(function (answer) {
+                var Phone = answer.phone;
+                var b = new Contact(Name, Phone);
                 var a = new PhoneBook();
                 a.addContact(b);
-                // console.log(a);
-                rl.close();
             });
         });
+        // rl.question('Name: ', (answer)=>{
+        //     rl.question('Phone: ', (tel)=>{
+        //         let b = new Contact(answer, tel);
+        //         let a = new PhoneBook();
+        //         a.addContact(b);
+        //         // console.log(a);
+        //         rl.close();
+        //     })
+        // }) 
     }
     else {
         console.log("We can only add contacts right now.....");
