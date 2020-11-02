@@ -4,8 +4,11 @@
   "description": "",
   "main": "PhoneBook.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "test": "mocha || true"
+  },  
+  "directories": {
+    "test": "test"
+  }, 
   "author": "Biko Jeremy Biteete",
   "license": "ISC",
   "devDependencies": {
@@ -13,10 +16,11 @@
     "@typescript-eslint/parser": "^4.4.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-plugin-import": "^2.22.1"
+    "eslint-plugin-import": "^2.22.1",
+    "mocha": "^8.1.3" 
   },
   "dependencies": {
     "@types/inquirer": "^7.3.1",
-    "chai": "^4.2.0"
+    "chai": "^4.2.0"    
   }
 }
